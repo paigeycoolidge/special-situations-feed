@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Special Situations Feed</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: #0f1117;
+      color: #e2e8f0;
+      min-height: 100vh;
+    }
+
+    header {
+      background: #1a1d27;
+      border-bottom: 1px solid #2d3148;
+      padding: 18px 32px;
+      display: flex;
+      align-items: baseline;
+      gap: 16px;
+    }
+
+    header h1 {
+      font-size: 1.1rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: #a5b4fc;
+    }
+
+    #last-updated {
+      font-size: 0.75rem;
+      color: #64748b;
+    }
+
+    .controls {
+      padding: 20px 32px 0;
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .filter-btn {
+      background: #1e2235;
+      border: 1px solid #2d3148;
+      color: #94a3b8;
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+
+    .filter-btn:hover { border-color: #a5b4fc; color: #e2e8f0; }
+
+    .filter-btn.active {
+      background: #312e81;
+      border-color: #a5b4fc;
+      color: #e0e7ff;
+    }
+
+    #feed {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+      gap: 16px;
+      padding: 20px 32px 40px;
+    }
+
+    .card {
+      background: #1a1d27;
+      border: 1px solid #2d3148;
+      border-radius: 10px;
+      padding: 18px 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      transition: border-color 0.15s;
+    }
+
+    .card:hover { border-color: #4f537a; }
+
+    .card-top {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .ticker {
+      font-size: 0.85rem;
+      font-weight: 700;
+      font-family: "SF Mono", "Fira Code", monospace;
+      color: #a5b4fc;
+      background: #1e2235;
+      border: 1px solid #2d3148;
+      padding: 2px 8px;
+      border-radius: 4px;
+      min-width: 44px;
+      text-align: center;
+    }
+
+    .company {
+      font-size: 0.85rem;
+      color: #94a3b8;
+      flex: 1;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .signal {
+      font-size: 0.7rem;
+      font-weight: 600;
+      padding: 2px 8px;
+      border-radius: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      flex-shrink: 0;
+    }
+
+    .signal-high  { background: #3f1515; color: #f87171; border: 1px solid #7f1d1d; }
+    .signal-med   { background: #3b2c0a; color: #fbbf24; border: 1px solid #78350f; }
+    .signal-low   { background: #0f2a1a; color: #4ade80; border: 1px solid #14532d; }
+
+    .headline {
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: #cbd5e1;
+      line-height: 1.4;
+    }
+
+    .thesis {
+      font-size: 0.82rem;
+      color: #94a3b8;
+      line-height: 1.55;
+    }
+
+    .card-footer {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 2px;
+    }
+
+    .type-badge {
+      font-size: 0.7rem;
+      font-weight: 600;
+      padding: 2px 8px;
+      border-radius: 4px;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    .type-ma       { background: #1e3a5f; color: #60a5fa; }
+    .type-spin     { background: #2d1b4e; color: #c084fc; }
+    .type-distress { background: #3f1515; color: #f87171; }
+    .type-activist { background: #1a3324; color: #4ade80; }
+
+    .card-source {
+      font-size: 0.72rem;
+      color: #475569;
+      margin-left: auto;
+    }
+
+    #status {
+      padding: 80px 32px;
+      text-align: center;
+      color: #475569;
+      font-size: 0.9rem;
+    }
+
+    .quote-bar {
+      background: #13151f;
+      border-bottom: 1px solid #2d3148;
+      padding: 20px 32px;
+      text-align: center;
+    }
+
+    .quote-bar blockquote {
+      font-family: Georgia, "Times New Roman", serif;
+      font-style: italic;
+      font-size: 0.92rem;
+      line-height: 1.7;
+      color: #c4c9e2;
+      margin: 0 auto 8px;
+      max-width: 720px;
+    }
+
+    .quote-bar cite {
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 0.72rem;
+      color: #4f5680;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-style: normal;
+    }
+
+    .quote-rule {
+      width: 32px;
+      height: 1px;
+      background: #3d4168;
+      margin: 0 auto 16px;
+    }
+
+    .quote-rule.bottom { margin: 16px auto 0; }
+
+    .quote-message {
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 0.82rem;
+      color: #7c83a8;
+      margin-top: 12px;
+      font-style: italic;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Special Situations Feed</h1>
+  <span id="last-updated">Loading...</span>
+</header>
+
+<div class="quote-bar">
+  <div class="quote-rule"></div>
+  <blockquote id="daily-quote"></blockquote>
+  <cite>&mdash; Thomas Jefferson</cite>
+  <div class="quote-rule bottom"></div>
+  <p class="quote-message">Love you Dad, hope you have a great day! — Paige</p>
+</div>
+
+<div class="controls">
+  <button class="filter-btn active" data-filter="all">All</button>
+  <button class="filter-btn" data-filter="ma">M&amp;A</button>
+  <button class="filter-btn" data-filter="spin">Spin-off</button>
+  <button class="filter-btn" data-filter="distress">Distress</button>
+  <button class="filter-btn" data-filter="activist">Activist</button>
+  <button class="filter-btn" data-filter="high">High Signal</button>
+</div>
+
+<div id="feed"><div id="status">Loading feed...</div></div>
+
+<script>
+  const JEFFERSON_QUOTES = [
+    "The man who reads nothing at all is better educated than the man who reads nothing but newspapers.",
+    "I cannot live without books.",
+    "Never spend your money before you have earned it.",
+    "In matters of style, swim with the current; in matters of principle, stand like a rock.",
+    "The price of liberty is eternal vigilance.",
+    "I find that the harder I work, the more luck I seem to have.",
+    "Do you want to know who you are? Don't ask. Act! Action will delineate and define you.",
+    "Nothing can stop the man with the right mental attitude from achieving his goal.",
+    "Honesty is the first chapter in the book of wisdom.",
+    "The most valuable of all talents is that of never using two words when one will do.",
+    "We hold these truths to be self-evident: that all men are created equal.",
+    "I like the dreams of the future better than the history of the past.",
+    "When you reach the end of your rope, tie a knot in it and hang on.",
+    "Determine never to be idle. No person will have occasion to complain of the want of time who never loses any.",
+    "He who knows best knows how little he knows.",
+    "Educate and inform the whole mass of the people. They are the only sure reliance for the preservation of our liberty.",
+    "The earth belongs to the living, not to the dead.",
+    "I would rather be exposed to the inconveniences attending too much liberty than those attending too small a degree of it.",
+    "The God who gave us life gave us liberty at the same time.",
+    "No duty the Executive had to perform was so trying as to put the right man in the right place.",
+    "It is always better to have no ideas than false ones.",
+    "One man with courage is a majority.",
+    "The care of human life and happiness, and not their destruction, is the first and only object of good government.",
+    "Were it left to me to decide whether we should have a government without newspapers, or newspapers without a government, I should not hesitate a moment to prefer the latter.",
+    "Question with boldness even the existence of a God; because, if there be one, he must more approve of the homage of reason, than that of blindfolded fear.",
+    "Whenever you do a thing, act as if all the world were watching.",
+    "The most fortunate of us, in our journey through life, frequently meet with calamities and misfortunes which may greatly afflict us.",
+    "Nothing gives one person so much advantage over another as to remain always cool and unruffled under all circumstances.",
+    "Our greatest happiness does not depend on the condition of life in which chance has placed us, but is always the result of a good conscience, good health, occupation, and freedom in all just pursuits.",
+    "I hope our wisdom will grow with our power, and teach us that the less we use our power the greater it will be.",
+  ];
+
+  function getDayOfYear() {
+    const now = new Date();
+    const start = new Date(now.getFullYear(), 0, 0);
+    return Math.floor((now - start) / 86400000);
+  }
+
+  (function renderQuote() {
+    const idx = (getDayOfYear() - 1 + JEFFERSON_QUOTES.length) % JEFFERSON_QUOTES.length;
+    document.getElementById("daily-quote").textContent = "\u201C" + JEFFERSON_QUOTES[idx] + "\u201D";
+  })();
+
+  let allSituations = [];
+  let activeFilter = "all";
+
+  async function loadFeed() {
+    try {
+      const res = await fetch("feed_data/feed.json?t=" + Date.now());
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      const data = await res.json();
+
+      allSituations = data.situations || [];
+
+      const ts = data.run_timestamp
+        ? new Date(data.run_timestamp).toLocaleString(undefined, {
+            month: "short", day: "numeric", hour: "2-digit", minute: "2-digit"
+          })
+        : data.date || "unknown";
+      document.getElementById("last-updated").textContent = "Last updated: " + ts;
+
+      renderCards(allSituations);
+    } catch (err) {
+      document.getElementById("status").textContent = "Failed to load feed. Run fetch_situations.py first.";
+      console.error(err);
+    }
+  }
+
+  function renderCards(situations) {
+    const feed = document.getElementById("feed");
+
+    if (!situations.length) {
+      feed.innerHTML = '<div id="status">No situations found for this filter.</div>';
+      return;
+    }
+
+    feed.innerHTML = situations.map(s => {
+      const ticker  = s.ticker  || "—";
+      const company = s.company || "";
+      const type    = (s.type   || "").toLowerCase();
+      const signal  = (s.signal || "").toLowerCase();
+
+      return `
+        <div class="card">
+          <div class="card-top">
+            <span class="ticker">${escHtml(ticker)}</span>
+            <span class="company" title="${escHtml(company)}">${escHtml(company)}</span>
+            <span class="signal signal-${signal}">${escHtml(signal)}</span>
+          </div>
+          <div class="headline">${escHtml(s.headline || "")}</div>
+          <div class="thesis">${escHtml(s.thesis || "")}</div>
+          <div class="card-footer">
+            <span class="type-badge type-${type}">${escHtml(type)}</span>
+            <span class="card-source">${escHtml(s.source || "")} · ${escHtml(s.time || "")}</span>
+          </div>
+        </div>`;
+    }).join("");
+  }
+
+  function applyFilter(filter) {
+    activeFilter = filter;
+    let filtered = allSituations;
+
+    if (filter === "high") {
+      filtered = allSituations.filter(s => (s.signal || "").toLowerCase() === "high");
+    } else if (filter !== "all") {
+      filtered = allSituations.filter(s => (s.type || "").toLowerCase() === filter);
+    }
+
+    renderCards(filtered);
+  }
+
+  function escHtml(str) {
+    return String(str)
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;");
+  }
+
+  document.querySelectorAll(".filter-btn").forEach(btn => {
+    btn.addEventListener("click", () => {
+      document.querySelectorAll(".filter-btn").forEach(b => b.classList.remove("active"));
+      btn.classList.add("active");
+      applyFilter(btn.dataset.filter);
+    });
+  });
+
+  loadFeed();
+</script>
+</body>
+</html>

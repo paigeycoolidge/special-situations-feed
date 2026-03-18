@@ -1,0 +1,107 @@
+{
+  "date": "2026-03-18",
+  "run_timestamp": "2026-03-18T16:47:40.329029Z",
+  "count": 10,
+  "situations": [
+    {
+      "ticker": "LION",
+      "company": "Lionsgate Studios Corp.",
+      "type": "spin",
+      "headline": "Lionsgate Studios post-separation filing signals ongoing corporate restructuring",
+      "thesis": "Lionsgate Studios was spun off from Lions Gate Entertainment as a pure-play content studio, and continued SEC filings suggest ongoing structural adjustments or capital markets activity. Post-spin entities often trade at dislocated valuations as index funds rebalance and the investor base transitions. Key risk is that the studio's leveraged balance sheet and volatile content slate make earnings highly unpredictable.",
+      "source": "SEC EDGAR",
+      "signal": "high",
+      "time": "2026-03-18"
+    },
+    {
+      "ticker": "SAIL",
+      "company": "SailPoint, Inc.",
+      "type": "ma",
+      "headline": "SailPoint filing activity post-Thoma Bravo take-private suggests potential re-IPO or strategic transaction",
+      "thesis": "SailPoint was taken private by Thoma Bravo in 2022 and re-listed; ongoing SEC filings indicate continued public market activity and potential secondary offerings or strategic M&A. The identity security market remains a consolidation hotspot, making SAIL both an acquirer and a target. Key risk is that elevated cybersecurity valuations could compress if growth decelerates.",
+      "source": "SEC EDGAR",
+      "signal": "high",
+      "time": "2026-03-18"
+    },
+    {
+      "ticker": "ENZN",
+      "company": "Enzon Pharmaceuticals, Inc.",
+      "type": "distress",
+      "headline": "Enzon Pharmaceuticals shell continues as potential cash-shell / liquidation play",
+      "thesis": "Enzon has been a revenue-less shell company for years, sitting on residual cash and royalty streams while activists have pushed for liquidation or a reverse merger. Any SEC filing activity could indicate progress toward a final distribution or a new transaction. Key risk is that management continues to burn cash on G&A with no resolution, destroying remaining value.",
+      "source": "SEC EDGAR",
+      "signal": "med",
+      "time": "2026-03-18"
+    },
+    {
+      "ticker": "FFAI",
+      "company": "Faraday Future Intelligent Electric Inc.",
+      "type": "distress",
+      "headline": "Faraday Future filing amid chronic cash burn and going-concern warnings",
+      "thesis": "Faraday Future has faced repeated going-concern warnings, minimal vehicle deliveries, and a need for continuous dilutive capital raises to survive. SEC filings likely relate to additional equity or debt issuances to fund operations. Key risk is total equity wipeout through further dilution or eventual bankruptcy filing.",
+      "source": "SEC EDGAR",
+      "signal": "med",
+      "time": "2026-03-18"
+    },
+    {
+      "ticker": "M",
+      "company": "Macy's, Inc.",
+      "type": "activist",
+      "headline": "Macy's SEC filing amid persistent activist and take-private interest in real estate value",
+      "thesis": "Macy's has been the target of repeated activist campaigns and take-private proposals (notably from Arkhouse/Brigade) focused on unlocking the vast real estate portfolio embedded below the retail operations. Continued filing activity may relate to strategic alternatives, asset monetization, or responses to shareholder pressure. Key risk is that any deal falls through due to financing difficulties or board resistance, leaving shares rangebound.",
+      "source": "SEC EDGAR",
+      "signal": "high",
+      "time": "2026-03-18"
+    },
+    {
+      "ticker": "NWSA",
+      "company": "News Corp",
+      "type": "activist",
+      "headline": "News Corp filing as pressure continues to simplify conglomerate structure",
+      "thesis": "News Corp has faced persistent activist pressure to separate its high-growth digital real estate assets (REA Group, Move) from legacy publishing, and the failed merger attempt with Fox highlighted governance concerns around Murdoch family control. SEC filings could relate to structural moves or ongoing shareholder engagement around value unlock. Key risk is that dual-class share structure gives the Murdoch family effective veto over any transformative transaction.",
+      "source": "SEC EDGAR",
+      "signal": "high",
+      "time": "2026-03-18"
+    },
+    {
+      "ticker": "OVID",
+      "company": "Ovid Therapeutics Inc.",
+      "type": "distress",
+      "headline": "Ovid Therapeutics filing amid strategic pivot after pipeline setbacks",
+      "thesis": "Ovid has undergone significant restructuring after clinical failures, pivoting to a royalty/asset-monetization model with its remaining pipeline and cash. SEC activity may indicate a reverse merger, liquidation, or new licensing deal. Key risk is that remaining assets have uncertain value and cash runway is limited without a transformative transaction.",
+      "source": "SEC EDGAR",
+      "signal": "med",
+      "time": "2026-03-18"
+    },
+    {
+      "ticker": "MPTI",
+      "company": "M-tron Industries, Inc.",
+      "type": "spin",
+      "headline": "M-tron Industries post-spinoff from LGL Group continues independent path",
+      "thesis": "M-tron was spun off from LGL Group as a pure-play frequency control and electronic components company serving defense and space markets. Post-spin micro-caps often see forced selling followed by re-rating as dedicated investors discover the name. Key risk is limited liquidity and customer concentration in government/defense contracts.",
+      "source": "SEC EDGAR",
+      "signal": "med",
+      "time": "2026-03-18"
+    },
+    {
+      "ticker": "HTLD",
+      "company": "Heartland Express Inc.",
+      "type": "distress",
+      "headline": "Heartland Express filing amid integration challenges and leveraged balance sheet post-acquisitions",
+      "thesis": "Heartland Express took on significant debt to acquire CFI and Smith Transport, and the trucking downcycle has pressured margins and cash flow, raising concerns about covenant compliance and balance sheet sustainability. SEC filings may relate to debt restructuring or asset sales. Key risk is that a prolonged freight recession forces deeper restructuring or equity dilution.",
+      "source": "SEC EDGAR",
+      "signal": "med",
+      "time": "2026-03-18"
+    },
+    {
+      "ticker": "GSIT",
+      "company": "GSI Technology Inc.",
+      "type": "activist",
+      "headline": "GSI Technology filing as activists push for strategic alternatives on cash-rich semiconductor firm",
+      "thesis": "GSI Technology has traded near or below its net cash value, attracting activist interest pushing for a sale, buyback, or wind-down of the in-memory compute pivot. The company's legacy SRAM business generates cash while the APU venture burns it, creating a classic activist catalyst. Key risk is that management continues investing in the unproven APU business, depleting the cash cushion that provides downside protection.",
+      "source": "SEC EDGAR",
+      "signal": "med",
+      "time": "2026-03-18"
+    }
+  ]
+}
