@@ -16,10 +16,12 @@ RECIPIENT      = os.getenv("RECIPIENT_EMAIL")
 FEED_PATH      = os.path.join(os.path.dirname(__file__), "feed_data", "feed.json")
 
 CATEGORY_LABELS = {
-    "ma":       ("M&A",        "#3b82f6"),
-    "spin":     ("Spin-off",   "#a855f7"),
-    "distress": ("Distress",   "#ef4444"),
-    "activist": ("Activist",   "#22c55e"),
+    "ma":          ("M&A",         "#3b82f6"),
+    "spin":        ("Spin-off",    "#a855f7"),
+    "distress":    ("Distress",    "#ef4444"),
+    "activist":    ("Activist",    "#22c55e"),
+    "cvr":         ("CVR",         "#f59e0b"),
+    "dissolution": ("Dissolution", "#94a3b8"),
 }
 
 SIGNAL_COLORS = {
@@ -116,7 +118,7 @@ def build_html(feed):
         grouped.setdefault(t, []).append(s)
 
     sections = ""
-    for key in ["ma", "spin", "distress", "activist"]:
+    for key in ["ma", "spin", "distress", "activist", "cvr", "dissolution"]:
         items = grouped.get(key, [])
         if not items:
             continue
