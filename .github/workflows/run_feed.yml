@@ -2,7 +2,7 @@ name: Run Special Situations Feed
 
 on:
   schedule:
-    - cron: '0 14 * * 1-5'  # 10am ET (2pm UTC), weekdays only
+    - cron: '0 13 * * 1-5'  # 8am ET (1pm UTC), weekdays only
   workflow_dispatch:          # allow manual trigger from GitHub UI
 
 jobs:
