@@ -1,6 +1,175 @@
 {
   "date": "2026-03-26",
-  "run_timestamp": "2026-03-26T21:31:07.540355Z",
-  "count": 0,
-  "situations": []
+  "run_timestamp": "2026-03-26T21:42:50.638247Z",
+  "count": 14,
+  "situations": [
+    {
+      "ticker": "VSAC",
+      "company": "Vision Sensing Acquisition Corp.",
+      "type": "dissolution",
+      "headline": "Vision Sensing Acquisition Corp. Announces Delisting and Subsequent Liquidation",
+      "thesis": "SPAC is delisting and liquidating, which means shareholders should receive their pro-rata share of the trust account. This is a standard SPAC liquidation play where investors can potentially buy units/shares below trust value and collect the liquidation distribution. Key risk is timing uncertainty and any trust depletion from operating expenses.",
+      "source": "GlobeNewswire",
+      "source_url": "https://www.globenewswire.com/news-release/2024/10/21/2966523/0/en/Vision-Sensing-Acquisition-Corp-Announces-Delisting-and-Subsequent-Liquidation.html",
+      "signal": "med",
+      "time": "2024-10-21",
+      "relevance_score": 7
+    },
+    {
+      "ticker": "GHSI",
+      "company": "Guardion Health Sciences",
+      "type": "dissolution",
+      "headline": "Guardion Health Sciences Announces Adoption of Plan of Dissolution and Liquidation",
+      "thesis": "Guardion Health Sciences has adopted a formal plan of dissolution and liquidation, including voluntary Nasdaq delisting and suspension of SEC reporting. Investors can potentially purchase shares below the estimated liquidation distribution value, capturing the spread as assets are wound down. Key risks include uncertain liquidation proceeds, timing of distributions, and potential claims against the estate reducing shareholder recovery.",
+      "source": "GlobeNewswire",
+      "source_url": "https://www.globenewswire.com/news-release/2024/10/01/2956250/0/en/Guardion-Health-Sciences-Announces-Adoption-of-Plan-of-Dissolution-and-Liquidation-Appointment-of-Interim-President-and-CEO.html",
+      "signal": "high",
+      "time": "2024-10-01",
+      "relevance_score": 8
+    },
+    {
+      "ticker": "EWCZ",
+      "company": "European Wax Center",
+      "type": "ma",
+      "headline": "European Wax Shareholders Unhappy With Merger Should Contact Julie & Holleman LLP Regarding Potential Legal Claims",
+      "thesis": "European Wax Center is subject to a proposed acquisition that law firms are investigating for potential unfairness to shareholders, suggesting the deal price may undervalue the company. This creates a potential catalyst for a bumped offer or deal renegotiation. Key risk is that the investigation is ambulance-chasing and the deal closes at the announced price without any bump.",
+      "source": "GlobeNewswire",
+      "source_url": "https://www.globenewswire.com/news-release/2026/02/10/3235695/0/en/European-Wax-Shareholders-Unhappy-With-Merger-Should-Contact-Julie-Holleman-LLP-Regarding-Potential-Legal-Claims.html",
+      "signal": "med",
+      "time": "2026-02-10",
+      "relevance_score": 7
+    },
+    {
+      "ticker": "SOUL",
+      "company": "Soulpower Acquisition Corp.",
+      "type": "ma",
+      "headline": "Soulpower Acquisition Corp. SEC Filing Activity",
+      "thesis": "Soulpower Acquisition Corp. is a SPAC that has filed with the SEC and trades under SOUL. SPACs searching for targets offer potential arbitrage opportunities if shares trade below trust value. Key risk is deal uncertainty and the possibility of liquidation if no target is identified within the deadline.",
+      "source": "SEC EDGAR",
+      "source_url": "https://www.sec.gov/cgi-bin/browse-edgar",
+      "signal": "low",
+      "time": "2026-03-26",
+      "relevance_score": 5
+    },
+    {
+      "ticker": "HYAC",
+      "company": "Haymaker Acquisition Corp. 4",
+      "type": "ma",
+      "headline": "Haymaker Acquisition Corp. 4 SEC Filing Activity",
+      "thesis": "Haymaker 4 is a SPAC from an experienced sponsor team (Haymaker has completed multiple prior deals), making it a higher-quality blank check company searching for an acquisition target. SPAC trust arbitrage may be available if shares trade near or below trust value. Key risk is no deal completion and liquidation at potentially reduced trust value.",
+      "source": "SEC EDGAR",
+      "source_url": "https://www.sec.gov/cgi-bin/browse-edgar",
+      "signal": "med",
+      "time": "2026-03-26",
+      "relevance_score": 5
+    },
+    {
+      "ticker": "LPAA",
+      "company": "Launch One Acquisition Corp.",
+      "type": "ma",
+      "headline": "Launch One Acquisition Corp. SEC Filing Activity",
+      "thesis": "Launch One Acquisition Corp. is a SPAC listed under LPAA that may offer trust value arbitrage if shares trade below the approximately $10 per share trust level. Standard SPAC situation with limited information on target pipeline. Key risk is failure to identify a target and liquidation with minimal upside.",
+      "source": "SEC EDGAR",
+      "source_url": "https://www.sec.gov/cgi-bin/browse-edgar",
+      "signal": "low",
+      "time": "2026-03-26",
+      "relevance_score": 5
+    },
+    {
+      "ticker": "XSLLU",
+      "company": "Xsolla SPAC 1",
+      "type": "ma",
+      "headline": "Xsolla SPAC 1 Announces Separate Trading of Class A Shares and Warrants",
+      "thesis": "Xsolla SPAC 1 is splitting its units into Class A shares and warrants, a standard milestone for newly IPO'd SPACs. This creates initial trading opportunities as warrants and shares find their respective valuations. Key risk is that the SPAC has no announced target yet and the gaming/fintech space has seen mixed SPAC deal outcomes.",
+      "source": "GlobeNewswire",
+      "source_url": "https://www.globenewswire.com/news-release/2026/03/17/3257041/0/en/Xsolla-SPAC-1-Announces-the-Separate-Trading-of-its-Class-A-Ordinary-Shares-and-Warrants-Commencing-March-18-2026.html",
+      "signal": "low",
+      "time": "2026-03-17",
+      "relevance_score": 5
+    },
+    {
+      "ticker": "SUMAU",
+      "company": "SUMA Acquisition Corporation",
+      "type": "ma",
+      "headline": "SUMA Acquisition Corporation Closes $172.5M IPO Including Full Over-Allotment Exercise",
+      "thesis": "SUMA closed an upsized $172.5M SPAC IPO with full exercise of the over-allotment option, indicating strong investor demand and a well-capitalized vehicle for a future acquisition. Trust value per share should be approximately $10, creating a floor for arbitrage. Key risk is the typical SPAC timeline uncertainty and potential liquidation if no deal is found.",
+      "source": "GlobeNewswire",
+      "source_url": "https://www.globenewswire.com/news-release/2026/03/13/3255443/0/en/SUMA-Acquisition-Corporation-Announces-Closing-of-172-500-000-Initial-Public-Offering-Including-Full-Exercise-of-Underwriters-Over-Allotment-Option.html",
+      "signal": "med",
+      "time": "2026-03-13",
+      "relevance_score": 5
+    },
+    {
+      "ticker": "HCVI-UN",
+      "company": "Hennessy Capital Investment Corp. VIII",
+      "type": "ma",
+      "headline": "Hennessy Capital Investment Corp. VIII Prices Upsized $210M IPO",
+      "thesis": "Hennessy Capital VIII, from a well-known SPAC sponsor with multiple successful prior deals, priced an upsized $210M IPO. The Hennessy franchise has a track record of completing deals (e.g., Canoo, Lordstown), making this a higher-conviction SPAC for trust arbitrage. Key risk is the evolving SPAC market environment and potential difficulty finding an attractive target.",
+      "source": "GlobeNewswire",
+      "source_url": "https://www.globenewswire.com/news-release/2026/02/05/3232612/0/en/Hennessy-Capital-Investment-Corp-VIII-Announces-Pricing-of-Upsized-210-000-000-Initial-Public-Offering.html",
+      "signal": "med",
+      "time": "2026-02-04",
+      "relevance_score": 6
+    },
+    {
+      "ticker": "NUWE",
+      "company": "Nuwellis, Inc.",
+      "type": "ma",
+      "headline": "Nuwellis Completes Acquisition of Rendiatech",
+      "thesis": "Nuwellis completed its acquisition of Rendiatech, adding automated kidney function monitoring technology to its fluid management platform. This is a transformative deal for a micro-cap medical device company that could expand its addressable market. Key risk is integration execution and continued cash burn as a small-cap med-tech company.",
+      "source": "GlobeNewswire",
+      "source_url": "https://www.globenewswire.com/news-release/2026/03/17/3257096/26106/en/Nuwellis-Completes-Acquisition-of-Rendiatech.html",
+      "signal": "med",
+      "time": "2026-03-17",
+      "relevance_score": 6
+    },
+    {
+      "ticker": "YYAI",
+      "company": "Connexa Sports Technologies (now YYAI)",
+      "type": "ma",
+      "headline": "Connexa Shareholders Approve Transaction to Acquire Yuanyu Enterprise Management",
+      "thesis": "Connexa Sports Technologies shareholders approved the acquisition of Yuanyu Enterprise Management, effectively a transformative reverse merger that changes the company's business focus. This type of small-cap reverse merger can create significant price dislocations as the market re-rates the combined entity. Key risk is post-merger execution and the typically poor track record of small-cap reverse mergers.",
+      "source": "GlobeNewswire",
+      "source_url": "https://www.globenewswire.com/news-release/2024/05/17/2884376/0/en/Connexa-Shareholders-Approve-Transaction-to-Acquire-Yuanyu-Enterprise-Management.html",
+      "signal": "med",
+      "time": "2024-05-17",
+      "relevance_score": 6
+    },
+    {
+      "ticker": "HTGC",
+      "company": "Hercules Capital",
+      "type": "activist",
+      "headline": "Hercules Capital Faces Securities Class Action After Short Seller Report",
+      "thesis": "Hercules Capital faces a securities class action following a Hunterbrook Media short seller report questioning the BDC's practices around PIK income and portfolio quality. The short report and resulting litigation create potential downside pressure on shares, offering a short opportunity or a contrarian long if the allegations prove overblown. Key risk is that the class action may have merit and further revelations could materially impair the stock, or conversely, the case may be dismissed leaving shorts squeezed.",
+      "source": "PR Newswire",
+      "source_url": "https://www.prnewswire.com/news-releases/hercules-capital-htgc-faces-securities-class-action-after-short-seller-claims-company-copied-google-ventures-questions-marks-and-piks----hagens-berman-302726627.html",
+      "signal": "high",
+      "time": "2026-03-26",
+      "relevance_score": 8
+    },
+    {
+      "ticker": "PED",
+      "company": "PEDEVCO Corp.",
+      "type": "ma",
+      "headline": "PEDEVCO Reports Year-End 2025 Proved Reserves Reflecting Full Post-Combination Asset Base",
+      "thesis": "PEDEVCO reports 32.1 MMBoe of proved reserves with PV-10 of $357.7M, reflecting its full post-combination asset base. This reserve report provides a fundamental valuation anchor for the stock post-merger, potentially highlighting undervaluation if the market cap trades significantly below PV-10. Key risk is commodity price sensitivity and the gap between PV-10 and realizable value.",
+      "source": "GlobeNewswire",
+      "source_url": "https://www.globenewswire.com/news-release/2026/02/25/3245052/0/en/PEDEVCO-Reports-Year-End-2025-Proved-Reserves.html",
+      "signal": "med",
+      "time": "2026-02-25",
+      "relevance_score": 5
+    },
+    {
+      "ticker": "MCW",
+      "company": "Mister Car Wash, Inc.",
+      "type": "ma",
+      "headline": "Mister Car Wash Hit with Investigation After Take-Private Offer Announced",
+      "thesis": "Mister Car Wash is subject to a take-private offer that has attracted law firm investigations for potential unfairness, suggesting the bid may undervalue the company. This is a classic merger arbitrage setup with potential for a bumped offer. Key risk is that the deal closes at the announced price without improvement, or the investigation is simply ambulance-chasing with no real impact on deal terms.",
+      "source": "GlobeNewswire",
+      "source_url": "https://www.globenewswire.com/news-release/2026/02/21/3242211/0/en/MCW-Stock-Notice-Mister-Car-Wash-Inc-Hit-with-Investigation-After-Take-Private-Offer-Announced-Current-Shareholders-Urged-to-Contact-BFA-Law.html",
+      "signal": "high",
+      "time": "2026-02-21",
+      "relevance_score": 8
+    }
+  ]
 }
