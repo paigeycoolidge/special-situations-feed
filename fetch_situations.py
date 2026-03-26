@@ -1,10 +1,12 @@
 import json
 import os
 import re
+import smtplib
 import time
 import traceback
 import xml.etree.ElementTree as ET
 from datetime import date, datetime
+from email.mime.text import MIMEText
 
 import requests
 from anthropic import Anthropic
@@ -413,6 +415,32 @@ def _parse_claude_response(raw_text):
         return None
 
 
+def send_credit_alert():
+    gmail_user = os.getenv("GMAIL_USER")
+    gmail_password = "".join(c for c in (os.getenv("GMAIL_APP_PASSWORD") or "") if c.isascii()).replace(" ", "")
+    recipient = os.getenv("RECIPIENT_EMAIL")
+    if not all([gmail_user, gmail_password, recipient]):
+        print("[Alert] Cannot send credit alert — email credentials not set")
+        return
+    msg = MIMEText(
+        "Your Anthropic API credit balance has been exhausted.\n\n"
+        "The Special Situations Feed could not analyze today's items.\n\n"
+        "Please top up your credits at:\n"
+        "https://console.anthropic.com/settings/billing\n\n"
+        "— Special Situations Feed"
+    )
+    msg["Subject"] = "⚠️ Action needed: Anthropic API credits exhausted"
+    msg["From"] = gmail_user
+    msg["To"] = recipient
+    try:
+        with smtplib.SMTP_SSL("smtp.gmail.com", 465) as server:
+            server.login(gmail_user, gmail_password)
+            server.sendmail(gmail_user, recipient, msg.as_string())
+        print("[Alert] Credit exhaustion alert sent")
+    except Exception as e:
+        print(f"[Alert] Failed to send credit alert: {e}")
+
+
 def analyze_with_claude(items):
     if not items:
         print("[Claude] No items to analyze")
@@ -433,10 +461,14 @@ def analyze_with_claude(items):
     client  = Anthropic(api_key=ANTHROPIC_API_KEY)
     batches = [items[i:i + BATCH_SIZE] for i in range(0, len(items), BATCH_SIZE)]
     all_results = []
+    credits_exhausted = False
 
     print(f"[Claude] Sending {len(items)} items in {len(batches)} batches of up to {BATCH_SIZE}...")
 
     for idx, batch in enumerate(batches, 1):
+        if credits_exhausted:
+            print(f"[Claude] Batch {idx} skipped — credits exhausted")
+            continue
         print(f"[Claude] Batch {idx}/{len(batches)} ({len(batch)} items)...")
         last_exc = None
         for attempt in range(1, 4):  # up to 3 attempts
@@ -457,15 +489,19 @@ def analyze_with_claude(items):
                 break
             except Exception as e:
                 last_exc = e
+                if "credit balance is too low" in str(e):
+                    credits_exhausted = True
+                    print(f"[Claude] Batch {idx}: credits exhausted — stopping batches")
+                    break
                 print(f"[Claude] Batch {idx} attempt {attempt}/3 error ({type(e).__name__}): {e}")
                 traceback.print_exc()
                 if attempt < 3:
                     time.sleep(5 * attempt)
-        if last_exc is not None:
+        if last_exc is not None and not credits_exhausted:
             print(f"[Claude] Batch {idx} failed all 3 attempts — skipping")
 
     print(f"[Claude] {len(all_results)} situations analyzed across all batches")
-    return all_results
+    return all_results, credits_exhausted
 
 
 def filter_by_relevance(situations, min_score=6):
@@ -504,10 +540,13 @@ def main():
         + fetch_seekingalpha()
     )
 
-    deduped    = deduplicate(all_items)
+    deduped     = deduplicate(all_items)
     prefiltered = keyword_prefilter(deduped)
-    analyzed   = analyze_with_claude(prefiltered)
-    situations = filter_by_relevance(analyzed, min_score=5)
+    analyzed, credits_exhausted = analyze_with_claude(prefiltered)
+    situations  = filter_by_relevance(analyzed, min_score=5)
+
+    if credits_exhausted:
+        send_credit_alert()
 
     save_feed(situations)
     print("=== Done ===")
