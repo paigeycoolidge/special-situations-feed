@@ -62,8 +62,9 @@ SYSTEM_PROMPT = (
     "spin-off, liquidation, CVR, or bankruptcy — should score at least a 5. "
     "Reserve low scores (1-4) only for items with no identifiable security, no clear catalyst, or purely macro/thematic content. "
     "Score 7-10 for situations with a named public company, a clear near-term catalyst, and an investable angle. "
+    "Each input item includes a URL field. Copy it exactly as-is into the source_url field of your output — do not modify, shorten, or omit it. "
     "Return a JSON array of objects with fields: "
-    "ticker, company, type, headline, thesis, source, signal (high/med/low), time, relevance_score (integer 1-10)."
+    "ticker, company, type, headline, thesis, source, source_url, signal (high/med/low), time, relevance_score (integer 1-10)."
 )
 
 
@@ -76,13 +77,23 @@ def fetch_edgar():
         resp.raise_for_status()
         hits = resp.json().get("hits", {}).get("hits", [])
         for hit in hits:
-            src = hit.get("_source", {})
+            src      = hit.get("_source", {})
+            cik      = src.get("entity_id", "")
+            form     = src.get("form_type", "")
+            company  = src.get("display_names", [""])[0]
+            # Link to the company's filing page on EDGAR
+            source_url = (
+                f"https://www.sec.gov/cgi-bin/browse-edgar"
+                f"?action=getcompany&CIK={cik}&type={form}&dateb=&owner=include&count=10"
+                if cik else "https://www.sec.gov/cgi-bin/browse-edgar"
+            )
             results.append({
-                "headline": f"{src.get('file_date','')} — {src.get('form_type','')}: {src.get('display_names', [''])[0]}",
-                "company":  src.get("display_names", [""])[0],
-                "ticker":   src.get("ticker", ""),
-                "source":   "SEC EDGAR",
-                "time":     src.get("file_date", TODAY),
+                "headline":   f"{src.get('file_date','')} — {form}: {company}",
+                "company":    company,
+                "ticker":     src.get("ticker", ""),
+                "source":     "SEC EDGAR",
+                "time":       src.get("file_date", TODAY),
+                "source_url": source_url,
             })
     except Exception as e:
         print(f"[EDGAR] Error: {e}")
@@ -122,6 +133,7 @@ def fetch_news():
                     "source":      "NewsAPI",
                     "time":        (a.get("publishedAt") or TODAY)[:10],
                     "description": a.get("description", ""),
+                    "source_url":  a.get("url", ""),
                 })
         except Exception as e:
             print(f"[NewsAPI] Error for '{query}': {e}")
@@ -160,7 +172,7 @@ def _parse_rss(xml_text, source_label):
                 "source":      source_label,
                 "time":        pub_date,
                 "description": re.sub(r"<[^>]+>", "", desc)[:300],
-                "url":         link,
+                "source_url":  link,
             })
     except ET.ParseError as e:
         print(f"[RSS] XML parse error for {source_label}: {e}")
@@ -183,6 +195,104 @@ def fetch_prnewswire():
         except Exception as e:
             print(f"[PRNewswire] Error for {label}: {e}")
     print(f"[PRNewswire] {len(results)} releases fetched")
+    return results
+
+
+def fetch_courtlistener():
+    results = []
+    try:
+        resp = requests.get(
+            "https://www.courtlistener.com/api/rest/v3/dockets/",
+            params={"type": 1, "order_by": "-date_filed", "chapter": 11, "page_size": 30},
+            headers=HEADERS,
+            timeout=15,
+        )
+        resp.raise_for_status()
+        for case in resp.json().get("results", []):
+            case_name   = case.get("case_name") or ""
+            date_filed  = (case.get("date_filed") or TODAY)[:10]
+            court       = case.get("court_id") or ""
+            docket_url  = "https://www.courtlistener.com" + (case.get("absolute_url") or "")
+            results.append({
+                "headline":    f"Chapter 11: {case_name} ({court})",
+                "company":     case_name,
+                "ticker":      "",
+                "source":      "CourtListener",
+                "time":        date_filed,
+                "description": f"Chapter 11 bankruptcy filed in {court}. Docket: {case.get('docket_number','')}",
+                "source_url":  docket_url,
+            })
+    except Exception as e:
+        print(f"[CourtListener] Error: {e}")
+    print(f"[CourtListener] {len(results)} cases fetched")
+    return results
+
+
+def fetch_seekingalpha():
+    results = []
+    seen = set()
+    sa_headers = {
+        "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+        "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+        "Accept-Language": "en-US,en;q=0.9",
+    }
+    pages = [
+        ("https://seekingalpha.com/market-news/mergers-acquisitions", "Seeking Alpha (M&A)"),
+        ("https://seekingalpha.com/market-news/restructuring",        "Seeking Alpha (Restructuring)"),
+    ]
+    for url, label in pages:
+        try:
+            resp = requests.get(url, headers=sa_headers, timeout=15)
+            # SA embeds article data as JSON in <script id="__NEXT_DATA__">
+            match = re.search(r'<script id="__NEXT_DATA__"[^>]*>(.*?)</script>', resp.text, re.DOTALL)
+            if match:
+                data      = json.loads(match.group(1))
+                articles  = (
+                    data.get("props", {})
+                        .get("pageProps", {})
+                        .get("marketNewsStories", [])
+                    or data.get("props", {})
+                        .get("pageProps", {})
+                        .get("initialState", {})
+                        .get("marketNews", {})
+                        .get("items", [])
+                )
+                for a in articles:
+                    title    = a.get("title") or a.get("headline") or ""
+                    slug     = a.get("uri") or a.get("slug") or ""
+                    pub_date = (a.get("publish_on") or a.get("publishedAt") or TODAY)[:10]
+                    art_url  = f"https://seekingalpha.com{slug}" if slug.startswith("/") else f"https://seekingalpha.com/article/{slug}"
+                    key      = title[:80]
+                    if title and key not in seen:
+                        seen.add(key)
+                        results.append({
+                            "headline":    title,
+                            "company":     "",
+                            "ticker":      "",
+                            "source":      label,
+                            "time":        pub_date,
+                            "description": "",
+                            "source_url":  art_url,
+                        })
+            else:
+                # Fallback: parse <h3>/<a> tags from the HTML
+                for m in re.finditer(r'href="(/news/\d+[^"]*)"[^>]*>([^<]{10,})<', resp.text):
+                    art_url = "https://seekingalpha.com" + m.group(1)
+                    title   = m.group(2).strip()
+                    key     = title[:80]
+                    if key not in seen:
+                        seen.add(key)
+                        results.append({
+                            "headline":   title,
+                            "company":    "",
+                            "ticker":     "",
+                            "source":     label,
+                            "time":       TODAY,
+                            "source_url": art_url,
+                        })
+        except Exception as e:
+            print(f"[SeekingAlpha] Error for {label}: {e}")
+    print(f"[SeekingAlpha] {len(results)} articles fetched")
     return results
 
 
@@ -241,11 +351,13 @@ def build_user_message(items):
             parts.append(f"Company: {item['company']}")
         if item.get("description"):
             parts.append(item["description"])
+        if item.get("source_url"):
+            parts.append(f"URL: {item['source_url']}")
         lines.append(" | ".join(p for p in parts if p))
     return "\n".join(lines)
 
 
-BATCH_SIZE = 40
+BATCH_SIZE = 25
 
 
 def _parse_claude_response(raw_text):
@@ -266,6 +378,9 @@ def analyze_with_claude(items):
     if not items:
         print("[Claude] No items to analyze")
         return []
+
+    if not ANTHROPIC_API_KEY:
+        raise RuntimeError("[Claude] ANTHROPIC_API_KEY is not set — cannot analyze items")
 
     client  = Anthropic(api_key=ANTHROPIC_API_KEY)
     batches = [items[i:i + BATCH_SIZE] for i in range(0, len(items), BATCH_SIZE)]
@@ -327,6 +442,8 @@ def main():
         + fetch_news()
         + fetch_prnewswire()
         + fetch_globenewswire()
+        + fetch_courtlistener()
+        + fetch_seekingalpha()
     )
 
     deduped    = deduplicate(all_items)
