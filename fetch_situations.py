@@ -359,7 +359,44 @@ def build_user_message(items):
     return "\n".join(lines)
 
 
-BATCH_SIZE = 25
+BATCH_SIZE = 20
+
+PREFILTER_KEYWORDS = [
+    "merger", "acquisition", "acqui", "takeover",
+    "spin-off", "spinoff", "spin off",
+    "bankruptcy", "chapter 11", "chapter11", "insolvent", "going concern",
+    "activist", "13d", "13-d",
+    "tender offer",
+    "liquidation", "dissolution", "wind down", "wind-down",
+    "cvr", "contingent value",
+    "restructuring", "restructure",
+    "going private", "take-private", "take private",
+    "special committee", "strategic review", "strategic alternatives",
+    "leveraged buyout", "lbo", "management buyout", "mbo",
+    "delist", "delisting",
+]
+
+MAX_CLAUDE_ITEMS = 40
+
+
+def keyword_prefilter(items):
+    """Keep items whose headline contains at least one high-signal keyword.
+    Score by number of keyword matches so we can rank when capping at MAX_CLAUDE_ITEMS."""
+    def score(item):
+        text = (item.get("headline", "") + " " + item.get("description", "")).lower()
+        return sum(1 for kw in PREFILTER_KEYWORDS if kw in text)
+
+    scored = [(score(item), item) for item in items]
+    matched = [(s, item) for s, item in scored if s > 0]
+    dropped = len(items) - len(matched)
+    print(f"[Prefilter] {len(items)} -> {len(matched)} items after keyword filter (dropped {dropped})")
+
+    # Sort by match strength descending, cap at MAX_CLAUDE_ITEMS
+    matched.sort(key=lambda x: x[0], reverse=True)
+    capped = [item for _, item in matched[:MAX_CLAUDE_ITEMS]]
+    if len(matched) > MAX_CLAUDE_ITEMS:
+        print(f"[Prefilter] Capped at {MAX_CLAUDE_ITEMS} (dropped {len(matched) - MAX_CLAUDE_ITEMS} lower-scoring matches)")
+    return capped
 
 
 def _parse_claude_response(raw_text):
@@ -468,7 +505,8 @@ def main():
     )
 
     deduped    = deduplicate(all_items)
-    analyzed   = analyze_with_claude(deduped)
+    prefiltered = keyword_prefilter(deduped)
+    analyzed   = analyze_with_claude(prefiltered)
     situations = filter_by_relevance(analyzed, min_score=5)
 
     save_feed(situations)
