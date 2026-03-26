@@ -34,6 +34,9 @@ jobs:
           echo "ANTHROPIC_API_KEY length: ${#ANTHROPIC_API_KEY}"
           echo "NEWS_API_KEY set: $( [ -n "$NEWS_API_KEY" ] && echo yes || echo no )"
 
+      - name: Test Anthropic API connectivity
+        run: python -c "import anthropic; client = anthropic.Anthropic(); print(client.models.list())"
+
       - name: Run fetch_situations.py
         run: python fetch_situations.py
 
@@ -46,4 +49,5 @@ jobs:
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add feed_data/feed.json
           git diff --cached --quiet || git commit -m "Feed update $(date +%Y-%m-%d)"
+          git pull --rebase origin main
           git push
