@@ -28,6 +28,12 @@ jobs:
       - name: Install dependencies
         run: pip install -r requirements.txt
 
+      - name: Debug secrets
+        run: |
+          echo "ANTHROPIC_API_KEY first 10 chars: $(echo $ANTHROPIC_API_KEY | cut -c1-10)"
+          echo "ANTHROPIC_API_KEY length: ${#ANTHROPIC_API_KEY}"
+          echo "NEWS_API_KEY set: $( [ -n "$NEWS_API_KEY" ] && echo yes || echo no )"
+
       - name: Run fetch_situations.py
         run: python fetch_situations.py
 

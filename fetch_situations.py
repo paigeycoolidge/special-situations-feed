@@ -1,6 +1,7 @@
 import json
 import os
 import re
+import traceback
 import xml.etree.ElementTree as ET
 from datetime import date, datetime
 
@@ -404,7 +405,8 @@ def analyze_with_claude(items):
                 print(f"[Claude] Batch {idx}: could not parse response")
                 print(response.content[0].text[:300])
         except Exception as e:
-            print(f"[Claude] Batch {idx} error: {e}")
+            print(f"[Claude] Batch {idx} error ({type(e).__name__}): {e}")
+            traceback.print_exc()
 
     print(f"[Claude] {len(all_results)} situations analyzed across all batches")
     return all_results
