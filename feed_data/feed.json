@@ -1,6 +1,79 @@
 {
   "date": "2026-03-26",
-  "run_timestamp": "2026-03-26T18:59:37.297847Z",
-  "count": 0,
-  "situations": []
+  "run_timestamp": "2026-03-26T20:32:10.896996Z",
+  "count": 6,
+  "situations": [
+    {
+      "ticker": "AGEN",
+      "company": "Agenus Inc",
+      "type": "distress",
+      "headline": "Agenus Inc SEC Filing \u2014 Immuno-Oncology Company with Capital Constraints",
+      "thesis": "Agenus is a clinical-stage biotech with a broad immuno-oncology pipeline but persistent cash burn and debt concerns. SEC filings could indicate capital raises, asset divestitures, or restructuring steps. Key risk is that the filing is routine and the stock is highly speculative with binary clinical outcomes.",
+      "source": "SEC EDGAR",
+      "source_url": "https://www.sec.gov/cgi-bin/browse-edgar",
+      "signal": "med",
+      "time": "2026-03-26",
+      "relevance_score": 5
+    },
+    {
+      "ticker": "REX",
+      "company": "REX American Resources Corp",
+      "type": "activist",
+      "headline": "REX American Resources SEC Filing \u2014 Cash-Rich Ethanol Company, Activist Target",
+      "thesis": "REX American Resources holds significant cash and ethanol investments relative to its market cap, making it a perennial target for activist investors seeking capital returns or strategic alternatives. An SEC filing could indicate ownership changes or shareholder proposals. Key risk is management entrenchment and illiquid stock.",
+      "source": "SEC EDGAR",
+      "source_url": "https://www.sec.gov/cgi-bin/browse-edgar",
+      "signal": "med",
+      "time": "2026-03-26",
+      "relevance_score": 5
+    },
+    {
+      "ticker": "GERN",
+      "company": "Geron Corp",
+      "type": "ma",
+      "headline": "Geron Corp SEC Filing \u2014 Commercial-Stage Biotech with Imetelstat",
+      "thesis": "Geron has transitioned to a commercial-stage biotech with its FDA-approved telomerase inhibitor Imetelstat for MDS, making it an attractive M&A target for larger pharma companies seeking hematology assets. SEC filings could reveal ownership changes or deal-related disclosures. Key risk is commercial execution risk and that the filing is routine.",
+      "source": "SEC EDGAR",
+      "source_url": "https://www.sec.gov/cgi-bin/browse-edgar",
+      "signal": "med",
+      "time": "2026-03-26",
+      "relevance_score": 5
+    },
+    {
+      "ticker": "EOSE",
+      "company": "Eos Energy Enterprises, Inc.",
+      "type": "distress",
+      "headline": "Eos Energy SEC Filing \u2014 Battery Storage Company with Liquidity Concerns",
+      "thesis": "Eos Energy is a zinc-based battery storage company that has faced significant cash burn, dilution, and going-concern risks while scaling manufacturing. SEC filings could indicate additional capital raises, DOE loan developments, or restructuring. Key risk is continued dilution and execution risk on manufacturing ramp.",
+      "source": "SEC EDGAR",
+      "source_url": "https://www.sec.gov/cgi-bin/browse-edgar",
+      "signal": "med",
+      "time": "2026-03-26",
+      "relevance_score": 5
+    },
+    {
+      "ticker": "ENTA",
+      "company": "Enanta Pharmaceuticals Inc",
+      "type": "ma",
+      "headline": "Enanta Pharmaceuticals SEC Filing \u2014 Cash-Rich Small Biotech M&A Candidate",
+      "thesis": "Enanta Pharmaceuticals is a small-cap biotech with significant cash reserves from its HCV royalty stream and antiviral pipeline, making it a potential acquisition target for larger pharma companies. SEC filings could signal strategic review, ownership changes, or deal-related activity. Key risk is pipeline setbacks and that the filing may be routine.",
+      "source": "SEC EDGAR",
+      "source_url": "https://www.sec.gov/cgi-bin/browse-edgar",
+      "signal": "med",
+      "time": "2026-03-26",
+      "relevance_score": 5
+    },
+    {
+      "ticker": "WS",
+      "company": "Worthington Steel, Inc.",
+      "type": "spin",
+      "headline": "Worthington Steel SEC Filing \u2014 Recent Spin-Off from Worthington Enterprises",
+      "thesis": "Worthington Steel was spun off from Worthington Enterprises (formerly Worthington Industries) in late 2023, and as a recent spin-off it presents a classic special situations opportunity as the investor base re-sorts and the standalone company establishes its own valuation. SEC filings could reveal post-spin strategic moves, capital allocation decisions, or potential M&A. Key risk is steel cyclicality and that the spin-off re-rating may already be priced in.",
+      "source": "SEC EDGAR",
+      "source_url": "https://www.sec.gov/cgi-bin/browse-edgar",
+      "signal": "med",
+      "time": "2026-03-26",
+      "relevance_score": 7
+    }
+  ]
 }
