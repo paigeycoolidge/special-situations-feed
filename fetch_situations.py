@@ -361,7 +361,7 @@ def build_user_message(items):
     return "\n".join(lines)
 
 
-BATCH_SIZE = 20
+BATCH_SIZE = 40
 
 PREFILTER_KEYWORDS = [
     "merger", "acquisition", "acqui", "takeover",
