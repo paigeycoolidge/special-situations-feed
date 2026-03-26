@@ -1,6 +1,7 @@
 import json
 import os
 import re
+import time
 import traceback
 import xml.etree.ElementTree as ET
 from datetime import date, datetime
@@ -383,6 +384,15 @@ def analyze_with_claude(items):
     if not ANTHROPIC_API_KEY:
         raise RuntimeError("[Claude] ANTHROPIC_API_KEY is not set — cannot analyze items")
 
+    # Test connectivity to api.anthropic.com before attempting any batches
+    print("[Claude] Testing connectivity to api.anthropic.com...")
+    try:
+        probe = requests.get("https://api.anthropic.com", timeout=10)
+        print(f"[Claude] Connectivity OK — HTTP {probe.status_code}")
+    except Exception as e:
+        print(f"[Claude] Connectivity FAILED ({type(e).__name__}): {e}")
+        traceback.print_exc()
+
     client  = Anthropic(api_key=ANTHROPIC_API_KEY)
     batches = [items[i:i + BATCH_SIZE] for i in range(0, len(items), BATCH_SIZE)]
     all_results = []
@@ -391,22 +401,32 @@ def analyze_with_claude(items):
 
     for idx, batch in enumerate(batches, 1):
         print(f"[Claude] Batch {idx}/{len(batches)} ({len(batch)} items)...")
-        try:
-            response = client.messages.create(
-                model="claude-opus-4-6",
-                max_tokens=8192,
-                system=SYSTEM_PROMPT,
-                messages=[{"role": "user", "content": build_user_message(batch)}],
-            )
-            parsed = _parse_claude_response(response.content[0].text)
-            if parsed:
-                all_results.extend(parsed)
-            else:
-                print(f"[Claude] Batch {idx}: could not parse response")
-                print(response.content[0].text[:300])
-        except Exception as e:
-            print(f"[Claude] Batch {idx} error ({type(e).__name__}): {e}")
-            traceback.print_exc()
+        last_exc = None
+        for attempt in range(1, 4):  # up to 3 attempts
+            try:
+                response = client.messages.create(
+                    model="claude-opus-4-6",
+                    max_tokens=8192,
+                    system=SYSTEM_PROMPT,
+                    messages=[{"role": "user", "content": build_user_message(batch)}],
+                    timeout=30.0,
+                )
+                parsed = _parse_claude_response(response.content[0].text)
+                if parsed:
+                    all_results.extend(parsed)
+                else:
+                    print(f"[Claude] Batch {idx}: could not parse response")
+                    print(response.content[0].text[:300])
+                last_exc = None
+                break
+            except Exception as e:
+                last_exc = e
+                print(f"[Claude] Batch {idx} attempt {attempt}/3 error ({type(e).__name__}): {e}")
+                traceback.print_exc()
+                if attempt < 3:
+                    time.sleep(5 * attempt)
+        if last_exc is not None:
+            print(f"[Claude] Batch {idx} failed all 3 attempts — skipping")
 
     print(f"[Claude] {len(all_results)} situations analyzed across all batches")
     return all_results
