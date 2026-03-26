@@ -409,7 +409,6 @@ def analyze_with_claude(items):
                     max_tokens=8192,
                     system=SYSTEM_PROMPT,
                     messages=[{"role": "user", "content": build_user_message(batch)}],
-                    timeout=30.0,
                 )
                 parsed = _parse_claude_response(response.content[0].text)
                 if parsed:
