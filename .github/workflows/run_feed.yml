@@ -50,4 +50,4 @@ jobs:
           git add feed_data/feed.json
           git diff --cached --quiet || git commit -m "Feed update $(date +%Y-%m-%d)"
           git pull --rebase origin main
-          git push
+          git push --force-with-lease origin main
