@@ -496,7 +496,10 @@ def analyze_with_claude(items):
                 print(f"[Claude] Batch {idx} attempt {attempt}/3 error ({type(e).__name__}): {e}")
                 traceback.print_exc()
                 if attempt < 3:
-                    time.sleep(5 * attempt)
+                    # Use longer backoff for overload (529) vs other errors
+                    delay = 60 * attempt if "overloaded" in str(e).lower() else 5 * attempt
+                    print(f"[Claude] Waiting {delay}s before retry...")
+                    time.sleep(delay)
         if last_exc is not None and not credits_exhausted:
             print(f"[Claude] Batch {idx} failed all 3 attempts — skipping")
 
