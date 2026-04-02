@@ -1,3 +1,4 @@
+import hashlib
 import json
 import os
 import re
@@ -17,8 +18,9 @@ load_dotenv()
 NEWS_API_KEY    = os.getenv("NEWS_API_KEY")
 ANTHROPIC_API_KEY = os.getenv("ANTHROPIC_API_KEY")
 
-TODAY     = date.today().isoformat()
-FEED_PATH = os.path.join(os.path.dirname(__file__), "feed_data", "feed.json")
+TODAY      = date.today().isoformat()
+FEED_PATH  = os.path.join(os.path.dirname(__file__), "feed_data", "feed.json")
+SEEN_PATH  = os.path.join(os.path.dirname(__file__), "feed_data", "seen_items.json")
 
 HEADERS = {"User-Agent": "special-situations-feed contact@example.com"}
 
@@ -514,19 +516,42 @@ def filter_by_relevance(situations, min_score=6):
     return filtered
 
 
+# ── Seen-item tracking ────────────────────────────────────────────────────────
+
+def get_item_id(situation):
+    raw = situation.get("source_url") or situation.get("headline") or str(situation)
+    return hashlib.md5(raw.encode()).hexdigest()
+
+def load_seen():
+    if os.path.exists(SEEN_PATH):
+        with open(SEEN_PATH) as f:
+            return set(json.load(f))
+    return set()
+
+def save_seen(seen):
+    with open(SEEN_PATH, "w") as f:
+        json.dump(list(seen), f)
+
+def filter_new(situations, seen):
+    new = [s for s in situations if get_item_id(s) not in seen]
+    print(f"[Seen] {len(situations)} situations, {len(new)} new (dropped {len(situations) - len(new)} already seen)")
+    return new
+
+
 # ── Output ────────────────────────────────────────────────────────────────────
 
-def save_feed(situations):
+def save_feed(situations, new_count):
     output = {
         "date":          TODAY,
         "run_timestamp": datetime.utcnow().isoformat() + "Z",
         "count":         len(situations),
+        "new_count":     new_count,
         "situations":    situations,
     }
     os.makedirs(os.path.dirname(FEED_PATH), exist_ok=True)
     with open(FEED_PATH, "w") as f:
         json.dump(output, f, indent=2)
-    print(f"[Feed] Saved {len(situations)} situations to {FEED_PATH}")
+    print(f"[Feed] Saved {len(situations)} situations ({new_count} new) to {FEED_PATH}")
 
 
 # ── Main ──────────────────────────────────────────────────────────────────────
@@ -551,7 +576,14 @@ def main():
     if credits_exhausted:
         send_credit_alert()
 
-    save_feed(situations)
+    seen     = load_seen()
+    new_only = filter_new(situations, seen)
+    save_feed(situations, new_count=len(new_only))
+
+    # Mark all of today's situations as seen for future runs
+    seen.update(get_item_id(s) for s in situations)
+    save_seen(seen)
+
     print("=== Done ===")
 
 
