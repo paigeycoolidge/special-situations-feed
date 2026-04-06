@@ -166,6 +166,16 @@
       margin-left: auto;
     }
 
+    .view-source {
+      font-size: 0.72rem;
+      color: #6366f1;
+      text-decoration: none;
+      margin-left: 10px;
+      flex-shrink: 0;
+    }
+
+    .view-source:hover { text-decoration: underline; }
+
     #status {
       padding: 80px 32px;
       text-align: center;
@@ -341,6 +351,7 @@
           <div class="card-footer">
             <span class="type-badge type-${type}">${escHtml(type)}</span>
             <span class="card-source">${escHtml(s.source || "")} · ${escHtml(s.time || "")}</span>
+            ${s.source_url ? `<a href="${escHtml(s.source_url)}" target="_blank" rel="noopener noreferrer" class="view-source">View source ↗</a>` : ""}
           </div>
         </div>`;
     }).join("");

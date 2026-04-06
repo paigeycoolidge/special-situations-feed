@@ -56,11 +56,18 @@ def signal_badge(signal):
 def category_section(label, color, situations):
     rows = ""
     for s in situations:
-        ticker  = s.get("ticker") or "—"
-        company = s.get("company") or ""
-        headline = s.get("headline") or ""
-        thesis   = s.get("thesis") or ""
-        signal   = s.get("signal") or ""
+        ticker     = s.get("ticker") or "—"
+        company    = s.get("company") or ""
+        headline   = s.get("headline") or ""
+        thesis     = s.get("thesis") or ""
+        signal     = s.get("signal") or ""
+        source_url = s.get("source_url") or ""
+
+        view_source = (
+            f'<a href="{source_url}" style="font-size:11px;color:#6366f1;text-decoration:none;">'
+            f'View source ↗</a>'
+            if source_url else ""
+        )
 
         rows += f"""
         <tr>
@@ -80,7 +87,10 @@ def category_section(label, color, situations):
                   line-height:1.4;">{headline}</td>
               </tr>
               <tr>
-                <td style="font-size:13px;color:#94a3b8;line-height:1.6;">{thesis}</td>
+                <td style="font-size:13px;color:#94a3b8;line-height:1.6;padding-bottom:8px;">{thesis}</td>
+              </tr>
+              <tr>
+                <td>{view_source}</td>
               </tr>
             </table>
           </td>
