@@ -110,6 +110,43 @@ def category_section(label, color, situations):
     </table>"""
 
 
+def source_summary_block(summary):
+    if not summary:
+        return ""
+    rows = ""
+    for row in summary:
+        fetched  = row.get("fetched", 0)
+        survived = row.get("survived", 0)
+        pct      = f"{int(survived/fetched*100)}%" if fetched else "—"
+        rows += (
+            f'<tr>'
+            f'<td style="padding:4px 12px 4px 0;font-size:12px;color:#94a3b8;">{row["source"]}</td>'
+            f'<td style="padding:4px 8px;font-size:12px;color:#64748b;text-align:right;">{fetched}</td>'
+            f'<td style="padding:4px 8px;font-size:12px;color:#4ade80;text-align:right;">{survived}</td>'
+            f'<td style="padding:4px 0 4px 8px;font-size:12px;color:#475569;text-align:right;">{pct}</td>'
+            f'</tr>'
+        )
+    return f"""
+    <table width="100%" cellpadding="0" cellspacing="0"
+      style="margin-bottom:24px;border:1px solid #2d3148;border-radius:8px;overflow:hidden;">
+      <tr>
+        <td colspan="4" style="background:#1a1d27;padding:10px 20px;border-bottom:2px solid #334155;">
+          <span style="font-size:11px;font-weight:700;text-transform:uppercase;
+            letter-spacing:0.08em;color:#64748b;">Source Breakdown</span>
+        </td>
+      </tr>
+      <tr style="background:#13151f;">
+        <td style="padding:6px 12px 6px 20px;font-size:10px;color:#475569;text-transform:uppercase;letter-spacing:0.06em;">Source</td>
+        <td style="padding:6px 8px;font-size:10px;color:#475569;text-transform:uppercase;letter-spacing:0.06em;text-align:right;">Fetched</td>
+        <td style="padding:6px 8px;font-size:10px;color:#475569;text-transform:uppercase;letter-spacing:0.06em;text-align:right;">Survived</td>
+        <td style="padding:6px 20px 6px 8px;font-size:10px;color:#475569;text-transform:uppercase;letter-spacing:0.06em;text-align:right;">Rate</td>
+      </tr>
+      <tr><td colspan="4" style="padding:0 20px;">
+        <table width="100%" cellpadding="0" cellspacing="0">{rows}</table>
+      </td></tr>
+    </table>"""
+
+
 def build_html(feed):
     date_str   = fmt_date(feed.get("date", ""))
     count      = feed.get("count", 0)
@@ -135,6 +172,7 @@ def build_html(feed):
         label, color = CATEGORY_LABELS.get(key, (key.upper(), "#64748b"))
         sections += category_section(label, color, items)
 
+    source_block = source_summary_block(feed.get("source_summary", []))
     quote, _ = get_daily_quote()
     subject = f"Special Situations · {date_str} · {count} signal{'s' if count != 1 else ''}"
 
@@ -182,6 +220,7 @@ def build_html(feed):
           <!-- Body -->
           <tr>
             <td style="background:#0f1117;padding:24px 0;">
+              {source_block}
               {sections}
             </td>
           </tr>

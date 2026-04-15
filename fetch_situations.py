@@ -540,13 +540,42 @@ def filter_new(situations, seen):
 
 # ── Output ────────────────────────────────────────────────────────────────────
 
-def save_feed(situations, new_count):
+def normalize_source(source):
+    s = (source or "").lower()
+    if "edgar" in s:          return "SEC EDGAR"
+    if "pr newswire" in s:    return "PR Newswire"
+    if "globenewswire" in s:  return "GlobeNewswire"
+    if "newsapi" in s:        return "NewsAPI"
+    if "courtlistener" in s:  return "CourtListener"
+    if "seeking alpha" in s:  return "Seeking Alpha"
+    return source or "Other"
+
+
+def build_source_summary(fetched_counts, situations):
+    survived = {}
+    for s in situations:
+        src = normalize_source(s.get("source", ""))
+        survived[src] = survived.get(src, 0) + 1
+    summary = []
+    for src, fetched in fetched_counts.items():
+        summary.append({"source": src, "fetched": fetched, "survived": survived.get(src, 0)})
+    return summary
+
+
+def print_source_summary(summary):
+    print("[Sources]")
+    for row in summary:
+        print(f"  - {row['source']}: {row['fetched']} fetched, {row['survived']} survived filter")
+
+
+def save_feed(situations, new_count, source_summary):
     output = {
-        "date":          TODAY,
-        "run_timestamp": datetime.utcnow().isoformat() + "Z",
-        "count":         len(situations),
-        "new_count":     new_count,
-        "situations":    situations,
+        "date":           TODAY,
+        "run_timestamp":  datetime.utcnow().isoformat() + "Z",
+        "count":          len(situations),
+        "new_count":      new_count,
+        "source_summary": source_summary,
+        "situations":     situations,
     }
     os.makedirs(os.path.dirname(FEED_PATH), exist_ok=True)
     with open(FEED_PATH, "w") as f:
@@ -559,14 +588,23 @@ def save_feed(situations, new_count):
 def main():
     print(f"=== Special Situations Feed — {TODAY} ===")
 
-    all_items = (
-        fetch_edgar()
-        + fetch_news()
-        + fetch_prnewswire()
-        + fetch_globenewswire()
-        + fetch_courtlistener()
-        + fetch_seekingalpha()
-    )
+    edgar_items = fetch_edgar()
+    news_items  = fetch_news()
+    prn_items   = fetch_prnewswire()
+    gnw_items   = fetch_globenewswire()
+    cl_items    = fetch_courtlistener()
+    sa_items    = fetch_seekingalpha()
+
+    fetched_counts = {
+        "SEC EDGAR":    len(edgar_items),
+        "NewsAPI":      len(news_items),
+        "PR Newswire":  len(prn_items),
+        "GlobeNewswire": len(gnw_items),
+        "CourtListener": len(cl_items),
+        "Seeking Alpha": len(sa_items),
+    }
+
+    all_items = edgar_items + news_items + prn_items + gnw_items + cl_items + sa_items
 
     deduped     = deduplicate(all_items)
     prefiltered = keyword_prefilter(deduped)
@@ -576,9 +614,12 @@ def main():
     if credits_exhausted:
         send_credit_alert()
 
+    source_summary = build_source_summary(fetched_counts, situations)
+    print_source_summary(source_summary)
+
     seen     = load_seen()
     new_only = filter_new(situations, seen)
-    save_feed(situations, new_count=len(new_only))
+    save_feed(situations, new_count=len(new_only), source_summary=source_summary)
 
     # Mark all of today's situations as seen for future runs
     seen.update(get_item_id(s) for s in situations)
