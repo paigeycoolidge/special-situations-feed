@@ -21,6 +21,7 @@ ANTHROPIC_API_KEY = os.getenv("ANTHROPIC_API_KEY")
 TODAY      = date.today().isoformat()
 FEED_PATH  = os.path.join(os.path.dirname(__file__), "feed_data", "feed.json")
 SEEN_PATH  = os.path.join(os.path.dirname(__file__), "feed_data", "seen_items.json")
+SEEN_SITUATIONS_PATH = os.path.join(os.path.dirname(__file__), "feed_data", "seen_situations.json")
 
 HEADERS = {"User-Agent": "special-situations-feed contact@example.com"}
 
@@ -538,6 +539,57 @@ def filter_new(situations, seen):
     return new
 
 
+# ── 7-day ticker/company deduplication ────────────────────────────────────────
+
+def _normalize_company(name):
+    suffixes = [" inc", " corp", " corporation", " ltd", " llc", " lp", " plc", " co"]
+    s = re.sub(r"\s+", " ", (name or "").lower().strip())
+    for sfx in suffixes:
+        if s.endswith(sfx + ".") or s.endswith(sfx):
+            s = s[: -len(sfx)].rstrip(". ")
+    return s
+
+
+def load_seen_situations():
+    """Load seen_situations.json and discard entries older than 7 days."""
+    if not os.path.exists(SEEN_SITUATIONS_PATH):
+        return []
+    with open(SEEN_SITUATIONS_PATH) as f:
+        entries = json.load(f)
+    cutoff = (datetime.utcnow().date() - __import__("datetime").timedelta(days=7)).isoformat()
+    return [e for e in entries if e.get("date", "") >= cutoff]
+
+
+def save_seen_situations(existing, new_situations):
+    updated = list(existing)
+    for s in new_situations:
+        updated.append({
+            "ticker":  (s.get("ticker") or "").strip().upper(),
+            "company": _normalize_company(s.get("company", "")),
+            "date":    TODAY,
+        })
+    with open(SEEN_SITUATIONS_PATH, "w") as f:
+        json.dump(updated, f, indent=2)
+
+
+def filter_by_seen_situations(situations, seen_list):
+    seen_tickers   = {e["ticker"]  for e in seen_list if e.get("ticker")}
+    seen_companies = {e["company"] for e in seen_list if e.get("company")}
+
+    fresh, dropped = [], []
+    for s in situations:
+        ticker  = (s.get("ticker") or "").strip().upper()
+        company = _normalize_company(s.get("company", ""))
+        if (ticker and ticker in seen_tickers) or (company and company in seen_companies):
+            dropped.append(s)
+        else:
+            fresh.append(s)
+
+    print(f"[7-day dedup] {len(situations)} -> {len(fresh)} situations "
+          f"(dropped {len(dropped)} seen in past 7 days)")
+    return fresh
+
+
 # ── Output ────────────────────────────────────────────────────────────────────
 
 def normalize_source(source):
@@ -614,6 +666,10 @@ def main():
     if credits_exhausted:
         send_credit_alert()
 
+    # 7-day ticker/company dedup — filter before saving to feed.json
+    seen_situations = load_seen_situations()
+    situations = filter_by_seen_situations(situations, seen_situations)
+
     source_summary = build_source_summary(fetched_counts, situations)
     print_source_summary(source_summary)
 
@@ -621,7 +677,8 @@ def main():
     new_only = filter_new(situations, seen)
     save_feed(situations, new_count=len(new_only), source_summary=source_summary)
 
-    # Mark all of today's situations as seen for future runs
+    # Persist seen state
+    save_seen_situations(seen_situations, situations)
     seen.update(get_item_id(s) for s in situations)
     save_seen(seen)
 

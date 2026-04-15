@@ -26,7 +26,7 @@ fi
 
 # Push updated feed.json to GitHub Pages
 cd "$DIR"
-git add feed_data/feed.json feed_data/seen_items.json >> "$LOG_FILE" 2>&1
+git add feed_data/feed.json feed_data/seen_items.json feed_data/seen_situations.json >> "$LOG_FILE" 2>&1
 git commit -m "Feed update $(date +%Y-%m-%d)" >> "$LOG_FILE" 2>&1
 if git push origin main >> "$LOG_FILE" 2>&1; then
     echo "[Git] Pushed feed_data/feed.json to GitHub Pages" >> "$LOG_FILE"
