@@ -18,5 +18,110 @@
     "ticker": "FCN",
     "company": "fti consulting,",
     "date": "2026-04-15"
+  },
+  {
+    "ticker": "VSAC",
+    "company": "vision sensing acquisition",
+    "date": "2026-04-16"
+  },
+  {
+    "ticker": "GHSI",
+    "company": "guardion health sciences",
+    "date": "2026-04-16"
+  },
+  {
+    "ticker": "EWCZ",
+    "company": "european wax center",
+    "date": "2026-04-16"
+  },
+  {
+    "ticker": "ENDV",
+    "company": "endonovo therapeutics",
+    "date": "2026-04-16"
+  },
+  {
+    "ticker": "FACT",
+    "company": "fact ii acquisition",
+    "date": "2026-04-16"
+  },
+  {
+    "ticker": "XSLLU",
+    "company": "xsolla spac 1",
+    "date": "2026-04-16"
+  },
+  {
+    "ticker": "SUMAU",
+    "company": "suma acquisition",
+    "date": "2026-04-16"
+  },
+  {
+    "ticker": "HCVIII",
+    "company": "hennessy capital investment corp. viii",
+    "date": "2026-04-16"
+  },
+  {
+    "ticker": "RENX",
+    "company": "renx enterprises",
+    "date": "2026-04-16"
+  },
+  {
+    "ticker": "PHGE",
+    "company": "biomx",
+    "date": "2026-04-16"
+  },
+  {
+    "ticker": "CVAT",
+    "company": "cavitation technologies,",
+    "date": "2026-04-16"
+  },
+  {
+    "ticker": "ELAB",
+    "company": "pmgc holdings",
+    "date": "2026-04-16"
+  },
+  {
+    "ticker": "CVAT",
+    "company": "cavitation technologies,",
+    "date": "2026-04-16"
+  },
+  {
+    "ticker": "YYAI",
+    "company": "connexa sports technologies",
+    "date": "2026-04-16"
+  },
+  {
+    "ticker": "ENDV",
+    "company": "endonovo therapeutics",
+    "date": "2026-04-16"
+  },
+  {
+    "ticker": "ENDV",
+    "company": "endonovo therapeutics",
+    "date": "2026-04-16"
+  },
+  {
+    "ticker": "GAMN",
+    "company": "great american food chain,",
+    "date": "2026-04-16"
+  },
+  {
+    "ticker": "MCW",
+    "company": "mister car wash",
+    "date": "2026-04-16"
+  },
+  {
+    "ticker": "GRTX",
+    "company": "galera therapeutics",
+    "date": "2026-04-16"
+  },
+  {
+    "ticker": "BKH",
+    "company": "black hills corp. / northwestern energy",
+    "date": "2026-04-16"
+  },
+  {
+    "ticker": "PED",
+    "company": "pedevco",
+    "date": "2026-04-16"
   }
 ]
