@@ -1,13 +1,13 @@
 {
-  "date": "2026-04-16",
-  "run_timestamp": "2026-04-16T12:04:47.269312Z",
-  "count": 21,
-  "new_count": 4,
+  "date": "2026-04-17",
+  "run_timestamp": "2026-04-17T13:00:38.795204Z",
+  "count": 0,
+  "new_count": 0,
   "source_summary": [
     {
       "source": "SEC EDGAR",
-      "fetched": 54,
-      "survived": 1
+      "fetched": 36,
+      "survived": 0
     },
     {
       "source": "NewsAPI",
@@ -16,13 +16,13 @@
     },
     {
       "source": "PR Newswire",
-      "fetched": 30,
+      "fetched": 19,
       "survived": 0
     },
     {
       "source": "GlobeNewswire",
       "fetched": 143,
-      "survived": 20
+      "survived": 0
     },
     {
       "source": "CourtListener",
@@ -35,258 +35,5 @@
       "survived": 0
     }
   ],
-  "situations": [
-    {
-      "ticker": "VSAC",
-      "company": "Vision Sensing Acquisition Corp.",
-      "type": "dissolution",
-      "headline": "Vision Sensing Acquisition Corp. Announces Delisting and Subsequent Liquidation",
-      "thesis": "SPAC failed to complete a business combination and is now delisting and liquidating, returning trust funds to shareholders. This presents a near-term cash collection opportunity as trust proceeds are distributed. Key risk is timing of distributions and any fees/expenses reducing the per-share payout.",
-      "source": "GlobeNewswire",
-      "source_url": "https://www.globenewswire.com/news-release/2024/10/21/2966523/0/en/Vision-Sensing-Acquisition-Corp-Announces-Delisting-and-Subsequent-Liquidation.html",
-      "signal": "med",
-      "time": "2024-10-21",
-      "relevance_score": 6
-    },
-    {
-      "ticker": "GHSI",
-      "company": "Guardion Health Sciences",
-      "type": "dissolution",
-      "headline": "Guardion Health Sciences Announces Adoption of Plan of Dissolution and Liquidation",
-      "thesis": "Guardion Health Sciences has adopted a formal plan of dissolution, will voluntarily delist from Nasdaq, and suspend SEC reporting. Investors can potentially capture a discount to estimated liquidation distributions if shares trade below expected net asset value. Key risk is uncertainty around the timing and magnitude of liquidating distributions after satisfying liabilities.",
-      "source": "GlobeNewswire",
-      "source_url": "https://www.globenewswire.com/news-release/2024/10/01/2956250/0/en/Guardion-Health-Sciences-Announces-Adoption-of-Plan-of-Dissolution-and-Liquidation-Appointment-of-Interim-President-and-CEO.html",
-      "signal": "high",
-      "time": "2024-10-01",
-      "relevance_score": 8
-    },
-    {
-      "ticker": "EWCZ",
-      "company": "European Wax Center",
-      "type": "ma",
-      "headline": "European Wax Shareholders Unhappy With Merger Should Contact Julie & Holleman LLP Regarding Potential Legal Claims",
-      "thesis": "European Wax Center is subject to a proposed acquisition, and law firms are investigating potential claims of unfairness in the deal price, which often signals the deal is near completion. This creates a merger arbitrage opportunity with the spread between current trading price and deal price. Key risk is deal break or regulatory challenge, though plaintiff law firm solicitations typically indicate a high-certainty close.",
-      "source": "GlobeNewswire",
-      "source_url": "https://www.globenewswire.com/news-release/2026/02/10/3235695/0/en/European-Wax-Shareholders-Unhappy-With-Merger-Should-Contact-Julie-Holleman-LLP-Regarding-Potential-Legal-Claims.html",
-      "signal": "med",
-      "time": "2026-02-10",
-      "relevance_score": 7
-    },
-    {
-      "ticker": "ENDV",
-      "company": "Endonovo Therapeutics",
-      "type": "spin",
-      "headline": "Endonovo Therapeutics Details Plan to Spin Off Medical Device Division as a Listed Public Company",
-      "thesis": "Endonovo plans to spin off its medical device division (SofPulse) as a separate publicly traded entity, potentially unlocking value for shareholders of both the M&A-focused parent and the medical device NewCo. The spin-off of a distinct operating business can create re-rating opportunities. Key risk is execution \u2014 OTCQB micro-cap spin-offs frequently face delays or fail to complete.",
-      "source": "GlobeNewswire",
-      "source_url": "https://www.globenewswire.com/news-release/2023/01/09/2585344/0/en/Endonovo-Therapeutics-Details-Plan-to-Spin-Off-Medical-Device-Division-as-a-Listed-Public-Company.html",
-      "signal": "low",
-      "time": "2023-01-09",
-      "relevance_score": 5
-    },
-    {
-      "ticker": "FACT",
-      "company": "FACT II Acquisition Corp.",
-      "type": "ma",
-      "headline": "FACT II Acquisition Corp. SEC Filing",
-      "thesis": "FACT II is a blank-check SPAC listed on NASDAQ currently searching for an acquisition target. SPACs approaching deal deadlines or announcing targets can present arbitrage opportunities if units trade near trust value. Key risk is that no target is identified and the SPAC liquidates, though downside is limited to trust value.",
-      "source": "SEC EDGAR",
-      "source_url": "https://www.sec.gov/cgi-bin/browse-edgar",
-      "signal": "low",
-      "time": "2026-04-16",
-      "relevance_score": 5
-    },
-    {
-      "ticker": "XSLLU",
-      "company": "Xsolla SPAC 1",
-      "type": "ma",
-      "headline": "Xsolla SPAC 1 Announces Separate Trading of Class A Ordinary Shares and Warrants",
-      "thesis": "Xsolla SPAC 1 units are splitting into separately traded shares and warrants, a routine post-IPO milestone. This creates potential trading opportunities in the warrants and shares as they begin independent price discovery. Key risk is the SPAC has not yet identified a target, and early SPAC trading can be illiquid.",
-      "source": "GlobeNewswire",
-      "source_url": "https://www.globenewswire.com/news-release/2026/03/17/3257041/0/en/Xsolla-SPAC-1-Announces-the-Separate-Trading-of-its-Class-A-Ordinary-Shares-and-Warrants-Commencing-March-18-2026.html",
-      "signal": "low",
-      "time": "2026-03-17",
-      "relevance_score": 5
-    },
-    {
-      "ticker": "SUMAU",
-      "company": "SUMA Acquisition Corporation",
-      "type": "ma",
-      "headline": "SUMA Acquisition Corporation Announces Closing of $172.5M IPO Including Full Over-Allotment Exercise",
-      "thesis": "SUMA is a newly formed SPAC that raised $172.5M including full exercise of the over-allotment, suggesting strong institutional demand. This is a pre-deal SPAC with trust cash available for arbitrage if shares trade near or below $10. Key risk is no target identified yet, so this is primarily a trust-floor arbitrage play.",
-      "source": "GlobeNewswire",
-      "source_url": "https://www.globenewswire.com/news-release/2026/03/13/3255443/0/en/SUMA-Acquisition-Corporation-Announces-Closing-of-172-500-000-Initial-Public-Offering-Including-Full-Exercise-of-Underwriters-Over-Allotment-Option.html",
-      "signal": "low",
-      "time": "2026-03-13",
-      "relevance_score": 5
-    },
-    {
-      "ticker": "HCVIII",
-      "company": "Hennessy Capital Investment Corp. VIII",
-      "type": "ma",
-      "headline": "Hennessy Capital Investment Corp. VIII Announces Pricing of Upsized $210M IPO",
-      "thesis": "Hennessy Capital VIII, the latest in the well-known Hennessy SPAC franchise, priced an upsized $210M IPO reflecting strong demand. Hennessy SPACs have a track record of completing deals, making this one to watch for a target announcement. Key risk is the extended timeline before a deal is announced and the opportunity cost of capital.",
-      "source": "GlobeNewswire",
-      "source_url": "https://www.globenewswire.com/news-release/2026/02/05/3232612/0/en/Hennessy-Capital-Investment-Corp-VIII-Announces-Pricing-of-Upsized-210-000-000-Initial-Public-Offering.html",
-      "signal": "med",
-      "time": "2026-02-05",
-      "relevance_score": 5
-    },
-    {
-      "ticker": "RENX",
-      "company": "RenX Enterprises",
-      "type": "ma",
-      "headline": "RenX Enterprises Reports Record Full-Year Results Following Resource Group US Holdings Acquisition",
-      "thesis": "RenX Enterprises completed its first full year post-acquisition of Resource Group US Holdings and reported record revenue, validating the M&A thesis. This is a post-deal integration story where the catalyst has largely played out. Key risk is sustainability of growth and the company being a recently transformed NASDAQ-listed entity with limited track record.",
-      "source": "GlobeNewswire",
-      "source_url": "https://www.globenewswire.com/news-release/2026/04/14/3273326/0/en/RenX-Enterprises-Reports-Record-Full-Year-Results-as-Microtec-UTM-1200-Turbo-Mill-Ships-from-Germany.html",
-      "signal": "low",
-      "time": "2026-04-14",
-      "relevance_score": 5
-    },
-    {
-      "ticker": "PHGE",
-      "company": "BiomX",
-      "type": "ma",
-      "headline": "BiomX Accelerates Defense Technology Buildout with DFSL Acquisition",
-      "thesis": "BiomX (formerly a phage therapy company) appears to have pivoted into defense technology and is acquiring DFSL to expand its AI-enabled security systems portfolio. This represents a significant corporate transformation that could rerate the stock. Key risk is execution of a dramatic business model shift and whether the market re-rates accordingly.",
-      "source": "GlobeNewswire",
-      "source_url": "https://www.globenewswire.com/news-release/2026/04/13/3272575/0/en/BiomX-Accelerates-Defense-Technology-Buildout-with-DFSL-Acquisition.html",
-      "signal": "med",
-      "time": "2026-04-13",
-      "relevance_score": 6
-    },
-    {
-      "ticker": "CVAT",
-      "company": "Cavitation Technologies, Inc.",
-      "type": "ma",
-      "headline": "Cavitation Technologies Confirms Proof of Funds for Proposed All-Cash Acquisition by European Guarantee Services",
-      "thesis": "Cavitation Technologies has confirmed proof of funds from European Guarantee Services for a proposed all-cash acquisition of 100% of outstanding shares, advancing a deal first announced via LOI. This is a classic takeout situation in a micro-cap with a confirmed buyer and funding. Key risk is the deal failing to close \u2014 proof of funds is not a definitive agreement and regulatory/shareholder approvals are still needed.",
-      "source": "GlobeNewswire",
-      "source_url": "https://www.globenewswire.com/news-release/2026/04/08/3270134/0/en/Cavitation-Technologies-Confirms-Proof-of-Funds-for-Proposed-Acquisition-by-European-Guarantee-Services-S-%C3%A0-r-l.html",
-      "signal": "high",
-      "time": "2026-04-08",
-      "relevance_score": 8
-    },
-    {
-      "ticker": "ELAB",
-      "company": "PMGC Holdings Inc.",
-      "type": "ma",
-      "headline": "PMGC Holdings Fully Utilizes $20M Equity Financing Facility, Advances Multi-Sector Acquisition Strategy",
-      "thesis": "PMGC Holdings has fully drawn down its $20M equity facility and is pursuing a multi-sector acquisition strategy, signaling aggressive capital deployment. The full utilization of the facility could fund imminent acquisitions that may serve as catalysts. Key risk is dilution from equity financing and execution risk on an unclear acquisition pipeline.",
-      "source": "GlobeNewswire",
-      "source_url": "https://www.globenewswire.com/news-release/2026/04/08/3269998/0/en/PMGC-Holdings-Inc-NASDAQ-ELAB-Fully-Utilizes-All-Available-in-20M-Equity-Financing-Facility-Strengthens-Cash-Position-and-Advances-Multi-Sector-Acquisition-Strategy.html",
-      "signal": "med",
-      "time": "2026-04-08",
-      "relevance_score": 5
-    },
-    {
-      "ticker": "CVAT",
-      "company": "Cavitation Technologies, Inc.",
-      "type": "ma",
-      "headline": "Cavitation Technologies Receives LOI from European Guarantee Services for All-Cash Acquisition",
-      "thesis": "This is the initial LOI announcement for the all-cash acquisition of CVAT by European Guarantee Services, preceding the later proof-of-funds confirmation. The LOI to acquire 100% of shares creates a clear near-term catalyst for this OTCQB-listed micro-cap. Key risk is the non-binding nature of the LOI and uncertainty around deal terms and timeline.",
-      "source": "GlobeNewswire",
-      "source_url": "https://www.globenewswire.com/news-release/2026/04/01/3266654/0/en/Cavitation-Technologies-Inc-Receives-Letter-of-Intent-from-European-Guarantee-Services-S-%C3%A0-r-l-in-all-Cash-Acquisition.html",
-      "signal": "high",
-      "time": "2026-04-01",
-      "relevance_score": 8
-    },
-    {
-      "ticker": "YYAI",
-      "company": "Connexa Sports Technologies",
-      "type": "ma",
-      "headline": "Connexa Shareholders Approve Transaction to Acquire Yuanyu Enterprise Management",
-      "thesis": "Connexa Sports Technologies shareholders approved the acquisition of Yuanyu Enterprise Management, a transformative deal that would significantly change the company's business focus. Shareholder approval is a key de-risking milestone. Key risk is pending regulatory approvals and whether the combined entity can create shareholder value given the pivot from sports tech to enterprise management.",
-      "source": "GlobeNewswire",
-      "source_url": "https://www.globenewswire.com/news-release/2024/05/17/2884376/0/en/Connexa-Shareholders-Approve-Transaction-to-Acquire-Yuanyu-Enterprise-Management.html",
-      "signal": "med",
-      "time": "2024-05-17",
-      "relevance_score": 6
-    },
-    {
-      "ticker": "ENDV",
-      "company": "Endonovo Therapeutics",
-      "type": "ma",
-      "headline": "Endonovo Closes Asset Purchase Agreement for a Minimum of $50M With SofPulse, Inc",
-      "thesis": "Endonovo completed the sale of its medical device assets and IP to SofPulse Inc. for a minimum $50M, which is the culmination of its previously announced spin-off/sale process. The closing of this APA represents a definitive value realization event. Key risk is the form and timing of consideration flowing to ENDV shareholders and the company's ongoing viability post-asset sale.",
-      "source": "GlobeNewswire",
-      "source_url": "https://www.globenewswire.com/news-release/2024/03/28/2854076/0/en/Endonovo-Closes-Asset-Purchase-Agreement-for-a-Minimum-of-50M-With-SofPulse-Inc.html",
-      "signal": "med",
-      "time": "2024-03-28",
-      "relevance_score": 6
-    },
-    {
-      "ticker": "ENDV",
-      "company": "Endonovo Therapeutics",
-      "type": "spin",
-      "headline": "Endonovo Announces Binding LOI to Sell SofPulse Assets to Spin-Off Company",
-      "thesis": "Endonovo signed a binding LOI to spin off its SofPulse medical device assets to a new entity led by Ira Weisberg. This is an earlier stage of the eventual asset sale that closed in 2024, representing the initial commitment to separate the businesses. Key risk at this stage was deal certainty and the binding nature of the LOI.",
-      "source": "GlobeNewswire",
-      "source_url": "https://www.globenewswire.com/news-release/2023/03/29/2636770/0/en/Endonovo-Announces-Binding-Letter-of-Intent-to-Sell-SofPulse-Assets-to-Spin-Off-Company.html",
-      "signal": "low",
-      "time": "2023-03-29",
-      "relevance_score": 5
-    },
-    {
-      "ticker": "GAMN",
-      "company": "Great American Food Chain, Inc.",
-      "type": "ma",
-      "headline": "Great American Food Chain Completes Merger with GreenMatter Biotech",
-      "thesis": "Great American Food Chain completed its reverse merger with GreenMatter Biotech, a biodegradable plastics company, transforming the OTC-listed shell into a materials science/biotech entity. Post-merger re-rating potential exists as the combined company begins operations. Key risk is the speculative OTC shell nature of the deal and limited liquidity.",
-      "source": "GlobeNewswire",
-      "source_url": "https://www.globenewswire.com/news-release/2026/04/15/3274790/0/en/Great-American-Food-Chain-OTC-GAMN-Completes-Merger-with-GreenMatter-Biotech-Names-Joe-H-Wicker-Jr-CEO.html",
-      "signal": "med",
-      "time": "2026-04-15",
-      "relevance_score": 5
-    },
-    {
-      "ticker": "MCW",
-      "company": "Mister Car Wash",
-      "type": "ma",
-      "headline": "Mister Car Wash Shareholders Notified of Rights in Pending Take-Private Deal",
-      "thesis": "Mister Car Wash is subject to a pending take-private transaction, and plaintiff law firms are soliciting shareholders for potential claims, indicating the deal is progressing toward close. This is a classic merger arbitrage opportunity in a NYSE-listed company with a clear near-term catalyst. Key risk is deal break, regulatory opposition, or a competing bid that disrupts the timeline.",
-      "source": "GlobeNewswire",
-      "source_url": "https://www.globenewswire.com/news-release/2026/04/15/3274247/0/en/MCW-Legal-News-Mister-Car-Wash-Shareholders-Have-Rights-in-Pending-Take-Private-Deal-Current-Shareholders-Notified-to-Contact-BFA-Law.html",
-      "signal": "high",
-      "time": "2026-04-15",
-      "relevance_score": 9
-    },
-    {
-      "ticker": "GRTX",
-      "company": "Galera Therapeutics",
-      "type": "ma",
-      "headline": "Galera Therapeutics and Obsidian Therapeutics Announce Merger Agreement and $350M Concurrent Private Placement",
-      "thesis": "Galera Therapeutics announced a definitive merger agreement with Obsidian Therapeutics, accompanied by a $350M private placement \u2014 a substantial capital infusion for this OTC-listed clinical-stage biopharma. The PIPE financing de-risks the combined entity's runway, and the merger creates a potentially transformative catalyst for GRTX shareholders. Key risk is the typical biotech reverse merger uncertainties including shareholder approval and the clinical-stage nature of both companies' pipelines.",
-      "source": "GlobeNewswire",
-      "source_url": "https://www.globenewswire.com/news-release/2026/04/14/3273818/0/en/Galera-Therapeutics-and-Obsidian-Therapeutics-Announce-Merger-Agreement-and-350-Million-Concurrent-Private-Placement.html",
-      "signal": "high",
-      "time": "2026-04-14",
-      "relevance_score": 9
-    },
-    {
-      "ticker": "BKH",
-      "company": "Black Hills Corp. / NorthWestern Energy",
-      "type": "ma",
-      "headline": "Black Hills Corp. and NorthWestern Energy Shareholders Approve Merger Proposals",
-      "thesis": "Both BKH and NWE shareholders approved the all-stock merger, removing a significant condition to closing this regulated utility combination. With shareholder approval secured, the remaining catalyst is regulatory approval from state utility commissions. Key risk is the regulatory approval timeline and potential conditions imposed by state regulators that could alter deal economics.",
-      "source": "GlobeNewswire",
-      "source_url": "https://www.globenewswire.com/news-release/2026/04/02/3267687/10381/en/Black-Hills-Corp-and-NorthWestern-Energy-Shareholders-Approve-Merger-Proposals.html",
-      "signal": "high",
-      "time": "2026-04-02",
-      "relevance_score": 9
-    },
-    {
-      "ticker": "PED",
-      "company": "PEDEVCO Corp.",
-      "type": "ma",
-      "headline": "PEDEVCO Reports Year-End 2025 Proved Reserves Reflecting Full Post-Combination Asset Base",
-      "thesis": "PEDEVCO reported 32.1 MMBoe of proved reserves with $357.7M PV-10, reflecting the full post-combination asset base following a prior acquisition. This is a post-deal value realization update showing the combined entity's reserve base. Key risk is commodity price sensitivity and whether the market assigns appropriate value to the proved reserves relative to the stock price.",
-      "source": "GlobeNewswire",
-      "source_url": "https://www.globenewswire.com/news-release/2026/02/25/3245052/0/en/PEDEVCO-Reports-Year-End-2025-Proved-Reserves.html",
-      "signal": "med",
-      "time": "2026-02-25",
-      "relevance_score": 5
-    }
-  ]
+  "situations": []
 }
