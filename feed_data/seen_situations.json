@@ -123,5 +123,10 @@
     "ticker": "PED",
     "company": "pedevco",
     "date": "2026-04-16"
+  },
+  {
+    "ticker": "UCB",
+    "company": "united community banks,",
+    "date": "2026-04-21"
   }
 ]
