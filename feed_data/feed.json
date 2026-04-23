@@ -1,12 +1,12 @@
 {
-  "date": "2026-04-21",
-  "run_timestamp": "2026-04-21T17:51:21.053010Z",
-  "count": 1,
-  "new_count": 1,
+  "date": "2026-04-22",
+  "run_timestamp": "2026-04-23T00:31:13.452461Z",
+  "count": 0,
+  "new_count": 0,
   "source_summary": [
     {
       "source": "SEC EDGAR",
-      "fetched": 0,
+      "fetched": 54,
       "survived": 0
     },
     {
@@ -21,8 +21,8 @@
     },
     {
       "source": "GlobeNewswire",
-      "fetched": 144,
-      "survived": 1
+      "fetched": 108,
+      "survived": 0
     },
     {
       "source": "CourtListener",
@@ -35,18 +35,5 @@
       "survived": 0
     }
   ],
-  "situations": [
-    {
-      "ticker": "UCB",
-      "company": "United Community Banks, Inc.",
-      "type": "ma",
-      "headline": "United Community Banks and Peach State Bancshares Announce Merger Agreement",
-      "thesis": "UCB (NYSE-listed) is acquiring privately held Peach State Bancshares in a definitive merger, continuing community bank consolidation. This is interesting as a bank M&A event\u2014UCB shares may react to deal economics and accretion/dilution analysis. Key risk is regulatory approval delays or deal termination given bank merger scrutiny.",
-      "source": "GlobeNewswire",
-      "source_url": "https://www.globenewswire.com/news-release/2026/04/21/3277809/34434/en/United-Community-Banks-Inc-and-Peach-State-Bancshares-Inc-The-Parent-of-Peach-State-Bank-Trust-Announce-Merger-Agreement.html",
-      "signal": "med",
-      "time": "2026-04-21",
-      "relevance_score": 7
-    }
-  ]
+  "situations": []
 }
