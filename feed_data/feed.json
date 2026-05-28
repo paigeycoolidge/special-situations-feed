@@ -1,6 +1,6 @@
 {
-  "date": "2026-05-25",
-  "run_timestamp": "2026-05-25T12:12:03.488876Z",
+  "date": "2026-05-28",
+  "run_timestamp": "2026-05-28T12:00:33.352170Z",
   "count": 0,
   "new_count": 0,
   "source_summary": [
@@ -16,12 +16,12 @@
     },
     {
       "source": "PR Newswire",
-      "fetched": 20,
+      "fetched": 28,
       "survived": 0
     },
     {
       "source": "GlobeNewswire",
-      "fetched": 141,
+      "fetched": 140,
       "survived": 0
     },
     {
