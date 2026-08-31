@@ -1,12 +1,12 @@
 {
-  "date": "2026-08-27",
-  "run_timestamp": "2026-08-27T12:31:15.121067Z",
+  "date": "2026-08-31",
+  "run_timestamp": "2026-08-31T12:01:44.054805Z",
   "count": 0,
   "new_count": 0,
   "source_summary": [
     {
       "source": "SEC EDGAR",
-      "fetched": 41,
+      "fetched": 35,
       "survived": 0
     },
     {
@@ -16,7 +16,7 @@
     },
     {
       "source": "PR Newswire",
-      "fetched": 20,
+      "fetched": 22,
       "survived": 0
     },
     {
